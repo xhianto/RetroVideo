@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2020-07-08T13:18:50.5113011Z"
+    }
+  },
+  "parameters": {
+    "resourceGroup": {
+      "Type": "resourceGroup",
+      "Value": "MVCSecurity"
+    },
+    "subscriptionId": {
+      "Type": "subscription",
+      "Value": "773875de-db75-4e59-a7f7-022d23319dcb"
+    }
+  }
+}

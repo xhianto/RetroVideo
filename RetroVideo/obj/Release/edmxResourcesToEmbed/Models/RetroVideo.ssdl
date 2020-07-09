@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RetroVideoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="films">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="genreid" Type="int" Nullable="false" />
+    <Property Name="titel" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="voorraad" Type="bigint" Nullable="false" />
+    <Property Name="gereserveerd" Type="bigint" Nullable="false" />
+    <Property Name="prijs" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="genres">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naam" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="klanten">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="familienaam" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="voornaam" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="straatNummer" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="postcode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="gemeente" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservaties">
+    <Key>
+      <PropertyRef Name="klantid" />
+      <PropertyRef Name="filmid" />
+      <PropertyRef Name="reservatie" />
+    </Key>
+    <Property Name="klantid" Type="int" Nullable="false" />
+    <Property Name="filmid" Type="int" Nullable="false" />
+    <Property Name="reservatie" Type="datetime2" Precision="0" Nullable="false" />
+  </EntityType>
+  <Association Name="films$filmsGenres">
+    <End Role="genres" Type="Self.genres" Multiplicity="1" />
+    <End Role="films" Type="Self.films" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genres">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="films">
+        <PropertyRef Name="genreid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="reservaties$reservatiesFilms">
+    <End Role="films" Type="Self.films" Multiplicity="1" />
+    <End Role="reservaties" Type="Self.reservaties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="films">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservaties">
+        <PropertyRef Name="filmid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="reservaties$reservatiesKlanten">
+    <End Role="klanten" Type="Self.klanten" Multiplicity="1" />
+    <End Role="reservaties" Type="Self.reservaties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="klanten">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservaties">
+        <PropertyRef Name="klantid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RetroVideoModelStoreContainer">
+    <EntitySet Name="films" EntityType="Self.films" Schema="retrovideo" store:Type="Tables" />
+    <EntitySet Name="genres" EntityType="Self.genres" Schema="retrovideo" store:Type="Tables" />
+    <EntitySet Name="klanten" EntityType="Self.klanten" Schema="retrovideo" store:Type="Tables" />
+    <EntitySet Name="reservaties" EntityType="Self.reservaties" Schema="retrovideo" store:Type="Tables" />
+    <AssociationSet Name="films$filmsGenres" Association="Self.films$filmsGenres">
+      <End Role="genres" EntitySet="genres" />
+      <End Role="films" EntitySet="films" />
+    </AssociationSet>
+    <AssociationSet Name="reservaties$reservatiesFilms" Association="Self.reservaties$reservatiesFilms">
+      <End Role="films" EntitySet="films" />
+      <End Role="reservaties" EntitySet="reservaties" />
+    </AssociationSet>
+    <AssociationSet Name="reservaties$reservatiesKlanten" Association="Self.reservaties$reservatiesKlanten">
+      <End Role="klanten" EntitySet="klanten" />
+      <End Role="reservaties" EntitySet="reservaties" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

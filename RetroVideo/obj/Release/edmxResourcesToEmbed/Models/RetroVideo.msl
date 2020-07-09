@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RetroVideoModelStoreContainer" CdmEntityContainer="RetroVideoEntities">
+    <EntitySetMapping Name="Films">
+      <EntityTypeMapping TypeName="RetroVideoModel.Film">
+        <MappingFragment StoreEntitySet="films">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="genreid" ColumnName="genreid" />
+          <ScalarProperty Name="titel" ColumnName="titel" />
+          <ScalarProperty Name="voorraad" ColumnName="voorraad" />
+          <ScalarProperty Name="gereserveerd" ColumnName="gereserveerd" />
+          <ScalarProperty Name="prijs" ColumnName="prijs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="RetroVideoModel.Genre">
+        <MappingFragment StoreEntitySet="genres">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="naam" ColumnName="naam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klanten">
+      <EntityTypeMapping TypeName="RetroVideoModel.Klant">
+        <MappingFragment StoreEntitySet="klanten">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="familienaam" ColumnName="familienaam" />
+          <ScalarProperty Name="voornaam" ColumnName="voornaam" />
+          <ScalarProperty Name="straatNummer" ColumnName="straatNummer" />
+          <ScalarProperty Name="postcode" ColumnName="postcode" />
+          <ScalarProperty Name="gemeente" ColumnName="gemeente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservaties">
+      <EntityTypeMapping TypeName="RetroVideoModel.Reservatie">
+        <MappingFragment StoreEntitySet="reservaties">
+          <ScalarProperty Name="klantid" ColumnName="klantid" />
+          <ScalarProperty Name="filmid" ColumnName="filmid" />
+          <ScalarProperty Name="reservatie" ColumnName="reservatie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

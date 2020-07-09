@@ -1,0 +1,18 @@
+﻿@model RetroVideo.Models.Klant
+@{
+    ViewBag.Title = "Bevestigen";
+}
+
+<h3 class="alert alert-info">Bevestigen</h3>
+@if (ViewBag.aantal > 0)
+{
+    <p>@ViewBag.aantal film(s) voor @ViewBag.naam</p>
+    <div>
+        <a href='@Url.Action("Resultaat", "Home", new { id = Model.id })' class="btn btn-default">Bevestigen</a>
+    </div>
+}
+else
+{
+    <p class="alert alert-warning">Er liggen nog geen films in mandje</p>
+}
+

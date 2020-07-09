@@ -1,0 +1,15 @@
+﻿@model List<RetroVideo.Models.Film>
+@if (Model.Any())
+{
+    <h3>@ViewBag.genre</h3>
+    foreach (var film in Model)
+    {
+        <a href='@Url.Action("Film", "Home", new { id = film.id })'>
+            <img src="~/Images/@(film.id).jpg" alt="@(film.titel)" />
+        </a>
+    }
+}
+else if (ViewBag.bestaat)
+{
+    <p class="alert alert-warning">Er zijn zijn geen films van dit genre beschikbaar</p>
+}

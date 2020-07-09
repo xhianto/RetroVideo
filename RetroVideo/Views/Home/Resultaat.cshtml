@@ -1,0 +1,25 @@
+﻿@model List<RetroVideo.Models.Film>
+
+@{
+    ViewBag.Title = "Resultaat";
+}
+
+<h3 class="alert alert-info">Rapport</h3>
+
+<h3 class="alert alert-success">Gelukte reserveringen</h3>
+@if (ViewBag.gelukt != null)
+{
+    foreach (var item in ViewBag.gelukt)
+    {
+        <label>@item.titel</label>
+    }
+}
+<h3 class="alert alert-danger">Mislukte reserveringen</h3>
+@if (ViewBag.mislukt != null)
+{
+    foreach (var item in ViewBag.mislukt)
+    {
+        <label>@item.titel</label>
+    }
+}
+

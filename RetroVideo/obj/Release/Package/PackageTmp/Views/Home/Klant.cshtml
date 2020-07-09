@@ -1,0 +1,45 @@
+﻿@model List<RetroVideo.Models.Klant>
+@{
+    ViewBag.Title = "Klant";
+}
+
+<h3 class="alert alert-info">Klanten</h3>
+@using (Html.BeginForm("Klant", "Home", FormMethod.Post))
+{
+    <div>
+        <text>Familienaam bevat:</text>
+        <div>
+            <input name="deelnaam" type="text" required/>
+        </div>
+    </div>
+    <button class="btn btn-default" type="submit" value="zoeken">
+        Zoeken
+    </button>
+}
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Straat - Huisnummer</th>
+                <th>Postcode</th>
+                <th>Gemeente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var klant in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(klant.voornaam + " " + klant.familienaam, "Bevestigen", new { id = klant.id })
+                    </td>
+                    <td>@Html.DisplayFor(m => klant.straatNummer) </td>
+                    <td>@Html.DisplayFor(m => klant.postcode) </td>
+                    <td>@Html.DisplayFor(m => klant.gemeente) </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

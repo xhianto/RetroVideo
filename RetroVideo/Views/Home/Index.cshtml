@@ -1,0 +1,27 @@
+﻿@model List<RetroVideo.Models.Genre>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3 class="alert alert-info">Genres</h3>
+@if (Model.Any())
+{
+    <div>
+        <ul class="nav nav-pills">
+            @foreach (var genre in Model)
+            {
+
+                <li @if (ViewBag.id == genre.id) { <text> class="active" </text> }>
+                    @Html.ActionLink(genre.naam, "Index", new { id = genre.id }, new { @style = "padding:10px 12px" })
+                </li>
+            }
+        </ul>
+    </div>
+    @Html.Action("LijstFilms", "Home", new { id = ViewBag.id })
+}
+else
+{
+    <div>
+        <p class="alert alert-danger">Er zijn geen genres beschikbaar</p>
+    </div>
+}

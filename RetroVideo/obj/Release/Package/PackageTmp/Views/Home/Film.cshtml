@@ -1,0 +1,41 @@
+﻿@model RetroVideo.Models.Film
+
+@{
+    ViewBag.Title = "Film";
+}
+
+<h3 class="alert alert-info">@Model.titel</h3>
+<img src="~/Images/@(Model.id).jpg" alt="@(Model.titel)" />
+<div>
+    <text>Prijs</text>
+    <p style="font-weight:bold">@Html.DisplayFor(m => m.prijs) </p>
+</div>
+<div>
+    <text>Voorrad</text>
+    <p style="font-weight:bold">@Html.DisplayFor(m => m.voorraad) </p>
+</div>
+<div>
+    <text>Gereserveerd</text>
+    <p style="font-weight:bold">@Html.DisplayFor(m => m.gereserveerd) </p>
+</div>
+<div>
+    <text>Beschikbaar</text>
+    <p style="font-weight:bold">@(Model.voorraad - Model.gereserveerd) </p>
+</div>
+@using (Html.BeginForm("InMand", "Home", new { id = Model.id }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    if (Session[Model.id.ToString()] != null)
+    {
+        <p class="alert alert-warning">Is al in Mandje geplaatst.</p>
+    }
+    else if (Model.voorraad - Model.gereserveerd > 0)
+    {
+        <button type="submit" value="inMand" class="btn btn-default">
+            In mandje
+        </button>
+    }
+    else
+    {
+        <p class="alert alert-danger">Film is niet beschikbaar.</p>
+    }
+}

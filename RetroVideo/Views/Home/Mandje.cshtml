@@ -1,0 +1,40 @@
+﻿@model List<RetroVideo.Models.Film>
+
+@{
+    ViewBag.Title = "Mandje";
+}
+
+<h3 class="alert alert-info">Mandje</h3>
+@if (Model.Any())
+{
+    using (Html.BeginForm("Verwijderen", "Home", FormMethod.Post))
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Prijs</th>
+                    <th>
+                        <button class="btn btn-default" type="submit" value="Verwijderen">Verwijderen</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.titel) </td>
+                        <td>@Html.DisplayFor(m => item.prijs) </td>
+                        <td>
+                            <input type="checkbox" name="@item.id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <p class="alert alert-warning">U heeft nog geen reserveringen</p>
+}
